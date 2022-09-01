@@ -1822,6 +1822,12 @@ def random_every_time(context, values):
     """
     return random.choice(values)
 
+@pass_context 
+def randomize_list(context, input_list):
+    """ Randomize the list and return a new
+        list with randomized elements
+    """  
+    return random.sample(input_list, len(input_list))
 
 def today_at(time_str: str = "") -> datetime:
     """Record fetching now where the time has been replaced with value."""
@@ -1981,6 +1987,7 @@ class TemplateEnvironment(ImmutableSandboxedEnvironment):
         self.filters["is_defined"] = fail_when_undefined
         self.filters["average"] = average
         self.filters["random"] = random_every_time
+        self.filters["random_list"] = randomize_list
         self.filters["base64_encode"] = base64_encode
         self.filters["base64_decode"] = base64_decode
         self.filters["ordinal"] = ordinal
